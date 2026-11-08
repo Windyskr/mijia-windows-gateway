@@ -1,0 +1,20 @@
+[package]
+name = "mijia-windows-gateway"
+version = "0.1.0"
+edition = "2024"
+description = "用 Windows 电脑代替米家中枢网关：被动解密米家温湿度计（原厂固件）的蓝牙广播，上传到自己的服务器"
+license = "MIT"
+
+[dependencies]
+aes = "0.8"
+ccm = "0.5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+windows = { version = "0.62", features = ["Devices_Bluetooth_Advertisement", "Devices_Radios", "Foundation", "Foundation_Collections", "Storage_Streams", "Win32_Foundation", "Win32_System_Threading", "Win32_System_WinRT", "Win32_Networking_WinHttp", "Win32_System_Console", "Win32_Security"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
